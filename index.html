@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>CYBERDECK — Windows Customization Suite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05050d;--panel:#0d0d1c;--line:#26264a;--cy:#00f0ff;--mg:#ff2bd6;--yl:#fcee0a;--gr:#39ff14;--tx:#cfe9f5;--mu:#7a8aa6;
+--hd:'Orbitron','Segoe UI',Arial,sans-serif;--bd:'Rajdhani','Segoe UI',Arial,sans-serif;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05050d}}
+:root[data-theme="dark"]{--bg:#05050d}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:500 18px/1.55 var(--bd);overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:-2;width:100%;height:100%}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(5,5,13,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:900 18px var(--hd);letter-spacing:3px;color:var(--cy);text-shadow:0 0 14px var(--cy)}
+.links{display:flex;gap:26px;align-items:center;font:600 14px var(--hd);letter-spacing:1px;color:var(--mu)}
+.links a:hover{color:var(--cy)}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 14px var(--hd);letter-spacing:2px;padding:15px 30px;border-radius:6px;border:1px solid var(--cy);color:var(--cy);cursor:pointer;background:transparent;transition:.2s}
+.btn:hover{background:var(--cy);color:#05050d;box-shadow:0 0 28px var(--cy)}
+.btn.pri{border:0;color:#05050d;background:linear-gradient(90deg,var(--cy),var(--mg));box-shadow:0 0 30px rgba(255,43,214,.45)}
+.btn.pri:hover{filter:brightness(1.15);box-shadow:0 0 44px rgba(0,240,255,.7)}
+.sm{padding:10px 18px;font-size:12px}
+section{padding:96px 0}
+.tag{font:700 12px var(--hd);letter-spacing:4px;color:var(--mg);margin-bottom:14px}
+h2{font:900 clamp(28px,4vw,42px)/1.15 var(--hd);margin:0 0 14px;color:#fff;text-shadow:0 0 22px rgba(0,240,255,.35)}
+.lead{color:var(--mu);max-width:640px;margin:0 0 44px}
+.hero{padding:150px 0 70px;text-align:center}
+.hero .tag{color:var(--cy)}
+.glitch{font:900 clamp(46px,10vw,118px)/1 var(--hd);letter-spacing:6px;margin:0;color:#fff;position:relative;display:inline-block;text-shadow:0 0 30px var(--cy),0 0 70px rgba(255,43,214,.5)}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;overflow:hidden}
+.glitch::before{color:var(--cy);transform:translate(3px,0);clip-path:inset(0 0 60% 0);animation:gl 3.2s infinite steps(1)}
+.glitch::after{color:var(--mg);transform:translate(-3px,0);clip-path:inset(60% 0 0 0);animation:gl 2.7s infinite steps(1) reverse}
+@keyframes gl{0%,90%{clip-path:inset(0 0 100% 0)}92%{clip-path:inset(20% 0 55% 0)}95%{clip-path:inset(60% 0 10% 0)}98%{clip-path:inset(40% 0 40% 0)}}
+.sub{font:500 clamp(18px,2.4vw,24px)/1.5 var(--bd);color:var(--tx);max-width:720px;margin:22px auto 34px}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.chip{font:600 13px var(--hd);letter-spacing:1px;padding:8px 16px;border:1px solid var(--line);border-radius:30px;color:var(--mu);background:rgba(13,13,28,.7)}
+.chip b{color:var(--cy)}
+.win{margin:64px auto 0;max-width:900px;border:1px solid rgba(0,240,255,.5);border-radius:14px;background:rgba(8,8,18,.92);box-shadow:0 0 60px rgba(0,240,255,.22),0 0 120px rgba(255,43,214,.15);text-align:left;overflow:hidden}
+.wbar{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line);font:700 11px var(--hd);letter-spacing:2px;color:var(--cy)}
+.wbody{display:grid;grid-template-columns:190px 1fr;min-height:300px}
+.side{border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:6px;font:600 12px var(--hd);color:var(--mu)}
+.side span{padding:10px 12px;border-radius:8px;border:1px solid transparent}
+.side .on{color:var(--cy);background:rgba(0,240,255,.1);border-color:rgba(0,240,255,.4)}
+.main{padding:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-content:start}
+.gcard{border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;background:rgba(16,16,32,.8)}
+.gcard small{display:block;font:700 10px var(--hd);letter-spacing:2px;color:var(--cy);margin-bottom:10px}
+.ring{--v:40;--c:var(--cy);width:108px;aspect-ratio:1;border-radius:50%;margin:0 auto;display:grid;place-items:center;position:relative;background:conic-gradient(var(--c) calc(var(--v)*1%),#1d1d3a 0);filter:drop-shadow(0 0 10px var(--c))}
+.ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#0b0b18}
+.ring b{position:relative;font:700 20px var(--hd);color:#fff}
+.tg{grid-column:1/-1;display:grid;gap:10px}
+.tr{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:16px;background:rgba(16,16,32,.8)}
+.sw{width:42px;height:22px;border-radius:12px;background:var(--cy);position:relative;box-shadow:0 0 12px var(--cy)}
+.sw::after{content:"";position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:#05050d}
+.sw.off{background:#2a2a48;box-shadow:none}.sw.off::after{right:auto;left:3px;background:#8396b0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{border:1px solid var(--line);border-radius:14px;padding:28px;background:linear-gradient(160deg,rgba(18,18,38,.9),rgba(10,10,22,.9));transition:.25s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--cy);transform:translateY(-6px);box-shadow:0 0 34px rgba(0,240,255,.25)}
+.card i{font-style:normal;font-size:30px;display:block;margin-bottom:14px;filter:drop-shadow(0 0 10px var(--mg))}
+.card h3{font:700 16px var(--hd);letter-spacing:1.5px;margin:0 0 8px;color:#fff}
+.card p{margin:0;color:var(--mu);font-size:17px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.wp{aspect-ratio:16/9;border-radius:10px;border:1px solid var(--line);position:relative;overflow:hidden;transition:.25s}
+.wp:hover{border-color:var(--mg);box-shadow:0 0 28px rgba(255,43,214,.5);transform:scale(1.04)}
+.wp span{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;font:700 11px var(--hd);letter-spacing:1px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;counter-reset:s}
+.step{border-left:2px solid var(--mg);padding:6px 0 6px 22px;counter-increment:s}
+.step::before{content:"0" counter(s);font:900 34px var(--hd);color:var(--cy);text-shadow:0 0 16px var(--cy)}
+.step h3{font:700 15px var(--hd);letter-spacing:1px;margin:6px 0;color:#fff}.step p{margin:0;color:var(--mu)}
+.dl{text-align:center;border:1px solid var(--cy);border-radius:18px;padding:64px 24px;background:radial-gradient(circle at 50% 0,rgba(0,240,255,.16),transparent 60%),rgba(10,10,22,.9);box-shadow:0 0 70px rgba(0,240,255,.2)}
+.dl p{color:var(--mu);margin:8px 0 28px}
+.about{display:grid;grid-template-columns:240px 1fr;gap:44px;align-items:center}
+.hex{width:220px;aspect-ratio:1;clip-path:polygon(50% 0,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%);background:linear-gradient(135deg,var(--cy),var(--mg));display:grid;place-items:center;filter:drop-shadow(0 0 22px var(--cy))}
+.hex div{width:94%;aspect-ratio:1;clip-path:inherit;background:#0a0a18;display:grid;place-items:center;font:900 84px var(--hd);color:#fff;text-shadow:0 0 24px var(--mg)}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px}
+.skills span{font:600 12px var(--hd);letter-spacing:1px;padding:8px 14px;border:1px solid var(--line);border-radius:6px;color:var(--cy);background:rgba(0,240,255,.06)}
+.soc{display:flex;gap:12px;flex-wrap:wrap}.soc a[hidden]{display:none}
+details{border:1px solid var(--line);border-radius:10px;padding:16px 22px;margin-bottom:12px;background:rgba(13,13,28,.8)}
+summary{cursor:pointer;font:700 14px var(--hd);letter-spacing:1px;color:#fff}details[open]{border-color:var(--cy)}details p{color:var(--mu);margin:12px 0 0}
+footer{border-top:1px solid var(--line);padding:34px 0 40px;text-align:center;color:var(--mu);font-size:15px}
+footer b{color:var(--cy)}
+.rv{opacity:0;transform:translateY(30px);transition:.7s}.rv.in{opacity:1;transform:none}
+#toast{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);opacity:0;background:#0b0b18;border:1px solid var(--cy);color:var(--cy);padding:14px 26px;border-radius:8px;font:700 12px var(--hd);letter-spacing:1px;transition:.3s;z-index:99;box-shadow:0 0 30px rgba(0,240,255,.4)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.links a:not(.btn){display:none}.wbody{grid-template-columns:1fr}.side{display:none}.main{grid-template-columns:1fr}.about{grid-template-columns:1fr;text-align:center}.hex{margin:0 auto}.skills,.soc{justify-content:center}section{padding:70px 0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<nav><div class="wrap"><a class="logo" href="#top">CYBERDECK</a>
+<div class="links"><a href="#features">FEATURES</a><a href="#wallpapers">WALLPAPERS</a><a href="#install">INSTALL</a><a href="#about">ABOUT</a><a class="btn pri sm" href="#download">DOWNLOAD</a></div></div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<div class="tag">// WINDOWS CUSTOMIZATION SUITE · v2.0</div>
+<h1 class="glitch" data-text="CYBERDECK">CYBERDECK</h1>
+<p class="sub">Take full control of your Windows look and performance. Neon wallpapers, taskbar, icons, system mods and live PC stats, all in one cyberpunk dashboard.</p>
+<div class="cta"><a class="btn pri dlbtn" href="#download">⬇ DOWNLOAD FOR WINDOWS</a><a class="btn" href="#features">EXPLORE FEATURES</a></div>
+<div class="chips"><span class="chip"><b>10</b> WALLPAPERS</span><span class="chip"><b>6</b> MODULES</span><span class="chip"><b>FREE</b></span><span class="chip">WINDOWS <b>10 / 11</b></span></div>
+<div class="win rv"><div class="wbar"><span>CYBERDECK // WINDOWS CUSTOMIZER</span><span>● ONLINE</span></div>
+<div class="wbody"><div class="side"><span class="on">◈ PC STATS</span><span>▣ WALLPAPERS</span><span>▤ TASKBAR</span><span>◫ ICONS</span><span>⬢ WINDOWS MODS</span><span>⚡ PERFORMANCE</span></div>
+<div class="main">
+<div class="gcard"><small>CPU</small><div class="ring" id="g1" style="--c:var(--cy)"><b>0%</b></div></div>
+<div class="gcard"><small>RAM</small><div class="ring" id="g2" style="--c:var(--mg)"><b>0%</b></div></div>
+<div class="gcard"><small>DISK C:</small><div class="ring" id="g3" style="--c:var(--yl)"><b>0%</b></div></div>
+<div class="tg"><div class="tr">Dark mode — system<div class="sw"></div></div><div class="tr">Centered taskbar icons<div class="sw"></div></div><div class="tr">Hide desktop icons<div class="sw off"></div></div></div>
+</div></div></div>
+</div></header>
+
+<section id="features"><div class="wrap">
+<div class="tag rv">// CAPABILITIES</div><h2 class="rv">Six modules. Total control.</h2>
+<p class="lead rv">Everything you need to make Windows look and run the way you want, with simple neon switches and instant feedback.</p>
+<div class="grid">
+<div class="card rv"><i>▣</i><h3>WALLPAPERS</h3><p>10 futuristic cyberpunk wallpapers built in, live preview and one-click apply. Add your own images too.</p></div>
+<div class="card rv"><i>▤</i><h3>TASKBAR</h3><p>Center or left icons, auto-hide, hide search, Task View and widgets, compact icons.</p></div>
+<div class="card rv"><i>◫</i><h3>ICONS &amp; DESKTOP</h3><p>Hide desktop icons, show file extensions and hidden files, full path in Explorer.</p></div>
+<div class="card rv"><i>⬢</i><h3>WINDOWS MODS</h3><p>Dark mode, transparency, accent title bars and the classic right-click menu for Windows 11.</p></div>
+<div class="card rv"><i>◈</i><h3>PC STATS</h3><p>Neon gauges and live graphs for CPU, RAM, disk and network, plus uptime and battery.</p></div>
+<div class="card rv"><i>⚡</i><h3>PERFORMANCE</h3><p>Switch power plans, clean temp files, flush DNS and see the heaviest running processes.</p></div>
+</div></div></section>
+
+<section id="wallpapers"><div class="wrap">
+<div class="tag rv">// GALLERY</div><h2 class="rv">10 built-in neon wallpapers</h2>
+<p class="lead rv">Generated locally in full 1920×1080 the first time you launch the app. No internet needed.</p>
+<div class="gal rv" id="gal"></div></div></section>
+
+<section id="install"><div class="wrap">
+<div class="tag rv">// QUICK START</div><h2 class="rv">Up and running in 3 steps</h2><p class="lead rv">No installer, no setup. Just one portable file.</p>
+<div class="steps">
+<div class="step rv"><h3>DOWNLOAD</h3><p>Get <b>CyberDeck.exe</b> using the button below.</p></div>
+<div class="step rv"><h3>RUN</h3><p>Double-click it. If Windows SmartScreen appears, choose “More info”, then “Run anyway”.</p></div>
+<div class="step rv"><h3>CUSTOMIZE</h3><p>Pick a module in the sidebar and flip the switches. Everything is reversible.</p></div>
+</div></div></section>
+
+<section id="download"><div class="wrap"><div class="dl rv">
+<div class="tag">// GET CYBERDECK</div><h2>Download for Windows</h2>
+<p>Free · Windows 10 / 11 (64-bit) · Portable .exe</p>
+<a class="btn pri dlbtn" id="dlmain" href="#download">⬇ DOWNLOAD CYBERDECK.EXE</a></div></div></section>
+
+<section id="about"><div class="wrap"><div class="about">
+<div class="hex rv"><div>L</div></div>
+<div class="rv"><div class="tag">// THE CREATOR</div><h2>Hi, I’m Lorik</h2>
+<p style="color:var(--mu);margin:0">I’m a developer and electronics maker. I love building things where software meets hardware, and CYBERDECK is my take on a Windows customizer that looks as good as the system it controls.</p>
+<div class="skills"><span>PYTHON</span><span>TKINTER / PYSIDE6</span><span>ESP32</span><span>ARDUINO</span><span>VOICE RECOGNITION</span><span>SERIAL &amp; WI-FI</span></div>
+<div class="soc" id="soc"></div></div></div></div></section>
+
+<section><div class="wrap">
+<div class="tag rv">// FAQ</div><h2 class="rv">Good to know</h2>
+<details class="rv"><summary>Is it safe?</summary><p>CYBERDECK only changes settings for your own Windows user account, using standard Windows settings. Every option can be switched back with the same toggle.</p></details>
+<details class="rv"><summary>Why does Windows or my antivirus warn me?</summary><p>The app is a new, unsigned program packaged with PyInstaller, so SmartScreen or antivirus can flag it by mistake. Choose “More info”, then “Run anyway” if you trust the source.</p></details>
+<details class="rv"><summary>Does it need administrator rights?</summary><p>Normally no. Most options change per-user settings.</p></details>
+<details class="rv"><summary>Why does Explorer restart when I toggle something?</summary><p>Some Windows settings only apply after Explorer restarts. The app does it for you and the screen may flicker for a second. Open File Explorer windows will close.</p></details>
+<details class="rv"><summary>Which Windows versions work?</summary><p>Windows 10 and 11. A few options, like centered taskbar and the classic menu, are for Windows 11.</p></details>
+</div></section>
+
+<footer><div class="wrap"><b>CYBERDECK</b> · Windows Customization Suite · Made by Lorik<br>© 2026 · Not affiliated with Microsoft. Windows is a trademark of Microsoft Corporation.</div></footer>
+<div id="toast"></div>
+
+<script>
+/* ====== EDIT THESE ====== */
+const DOWNLOAD_URL = "https://github.com/loriklushtaku-cpu/CyberDeck/releases/download/v2.0/CyberDeck.exe";               /* paste your CyberDeck.exe download link here */
+const LINKS = {GITHUB:"", INSTAGRAM:"", EMAIL:""};  /* e.g. GITHUB:"https://github.com/you", EMAIL:"mailto:you@mail.com" */
+/* ======================== */
+const $=s=>document.querySelector(s);
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)}
+const dm=$('#dlmain');
+if(DOWNLOAD_URL){dm.href=DOWNLOAD_URL;dm.target='_blank';dm.rel='noopener noreferrer';dm.addEventListener('click',()=>toast('DOWNLOAD STARTED'))}
+else dm.addEventListener('click',e=>{e.preventDefault();toast('DOWNLOAD LINK COMING SOON')});
+const soc=$('#soc');Object.entries(LINKS).forEach(([k,v])=>{if(!v)return;const a=document.createElement('a');a.className='btn sm';a.href=v;a.target='_blank';a.rel='noopener';a.textContent=k;soc.appendChild(a)});
+const W=[["Neon Sunset Grid","radial-gradient(circle at 50% 56%,#fcee0a 0 13%,#ff2bd6 14% 21%,transparent 22%),linear-gradient(#0b0221,#8a0f6e 62%,#05010f 62%)"],
+["Night City","repeating-linear-gradient(90deg,#120a28 0 22px,#1a0f38 22px 40px),linear-gradient(#02020a,#2a0a4a)"],
+["Neon Rain","repeating-linear-gradient(100deg,transparent 0 18px,rgba(0,240,255,.55) 19px 20px),#04040c"],
+["Synthwave Mountains","linear-gradient(160deg,#10002b,#c0126f)"],
+["Cyber Circuit","repeating-linear-gradient(0deg,rgba(0,240,255,.28) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(255,43,214,.22) 0 1px,transparent 1px 22px),#05081a"],
+["Neon Tunnel","repeating-radial-gradient(circle,#ff2bd6 0 3px,#03030a 4px 16px)"],
+["Digital Matrix","repeating-linear-gradient(90deg,rgba(57,255,20,.4) 0 2px,transparent 2px 14px),#010806"],
+["Orbit Rings","repeating-radial-gradient(ellipse at center,transparent 0 14px,rgba(252,238,10,.65) 15px 16px),#030308"],
+["Hex Grid","radial-gradient(rgba(0,240,255,.4) 2px,transparent 3px) 0 0/22px 22px,#080818"],
+["Twin Moons","radial-gradient(circle at 30% 32%,#00f0ff 0 9%,transparent 10%),radial-gradient(circle at 68% 26%,#ff2bd6 0 6%,transparent 7%),linear-gradient(#0a0221,#4a0f6a)"]];
+$('#gal').innerHTML=W.map(([n,b])=>`<div class="wp" style="background:${b}"><span>${n.toUpperCase()}</span></div>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&(e.target.classList.add('in'),io.unobserve(e.target))),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const G=[['#g1',34],['#g2',58],['#g3',71]];
+function gauges(){G.forEach(([s,b])=>{const v=Math.max(5,Math.min(97,Math.round(b+(Math.random()-.5)*28)));const r=$(s);r.style.setProperty('--v',v);r.firstChild.textContent=v+'%'})}
+gauges();setInterval(gauges,1600);
+/* neon rain background */
+const c=$('#bg'),x=c.getContext('2d');let w,h,d=[];
+function rs(){w=c.width=innerWidth;h=c.height=innerHeight;d=Array.from({length:Math.floor(w/26)},()=>({x:Math.random()*w,y:Math.random()*h,l:40+Math.random()*120,s:1+Math.random()*2.4,c:Math.random()>.5?'0,240,255':'255,43,214'}))}
+rs();addEventListener('resize',rs);
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function fr(){x.fillStyle='#05050d';x.fillRect(0,0,w,h);
+ const g=x.createRadialGradient(w*.85,0,0,w*.85,0,w*.6);g.addColorStop(0,'rgba(255,43,214,.16)');g.addColorStop(1,'transparent');x.fillStyle=g;x.fillRect(0,0,w,h);
+ const g2=x.createRadialGradient(0,h,0,0,h,w*.6);g2.addColorStop(0,'rgba(0,240,255,.13)');g2.addColorStop(1,'transparent');x.fillStyle=g2;x.fillRect(0,0,w,h);
+ d.forEach(p=>{const l=x.createLinearGradient(p.x,p.y-p.l,p.x,p.y);l.addColorStop(0,`rgba(${p.c},0)`);l.addColorStop(1,`rgba(${p.c},.55)`);x.strokeStyle=l;x.lineWidth=1.4;x.beginPath();x.moveTo(p.x,p.y-p.l);x.lineTo(p.x,p.y);x.stroke();if(!rm){p.y+=p.s;if(p.y-p.l>h){p.y=-10;p.x=Math.random()*w}}});
+ if(!rm)requestAnimationFrame(fr)}
+fr();
+</script>
+</body>
+</html>
