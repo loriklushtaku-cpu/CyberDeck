@@ -78,6 +78,20 @@ h2{font:900 clamp(28px,4vw,42px)/1.15 var(--hd);margin:0 0 14px;color:#fff;text-
 .step{border-left:2px solid var(--mg);padding:6px 0 6px 22px;counter-increment:s}
 .step::before{content:"0" counter(s);font:900 34px var(--hd);color:var(--cy);text-shadow:0 0 16px var(--cy)}
 .step h3{font:700 15px var(--hd);letter-spacing:1px;margin:6px 0;color:#fff}.step p{margin:0;color:var(--mu)}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1060px;margin:0 auto}
+.plan{border:1px solid var(--line);border-radius:16px;padding:34px 30px;background:linear-gradient(160deg,rgba(18,18,38,.92),rgba(10,10,22,.92));position:relative;display:flex;flex-direction:column}
+.plan.mid{border-color:var(--cy);box-shadow:0 0 36px rgba(0,240,255,.2)}
+.plan.pro{border-color:var(--mg);box-shadow:0 0 50px rgba(255,43,214,.28)}
+.plan .bd{position:absolute;top:-13px;right:22px;font:700 11px var(--hd);letter-spacing:2px;padding:5px 12px;border-radius:20px;background:linear-gradient(90deg,var(--cy),var(--mg));color:#05050d}
+.plan h3{font:900 18px var(--hd);letter-spacing:3px;margin:0;color:#fff}
+.price{font:900 46px var(--hd);color:var(--cy);margin:14px 0 4px;text-shadow:0 0 18px var(--cy)}
+.plan.pro .price{color:var(--mg);text-shadow:0 0 18px var(--mg)}
+.price small{font:500 14px var(--bd);color:var(--mu);text-shadow:none}
+.plan ul{list-style:none;padding:0;margin:20px 0 28px;flex:1}
+.plan li{padding:8px 0 8px 28px;position:relative;border-bottom:1px solid #1c1c38;font-size:17px}
+.plan li::before{content:"\2713";position:absolute;left:0;color:var(--gr);font-weight:700}
+.plan li.no{color:#5a6680}.plan li.no::before{content:"\2715";color:#5a6680}
+.plan .btn{justify-content:center}
 .dl{text-align:center;border:1px solid var(--cy);border-radius:18px;padding:64px 24px;background:radial-gradient(circle at 50% 0,rgba(0,240,255,.16),transparent 60%),rgba(10,10,22,.9);box-shadow:0 0 70px rgba(0,240,255,.2)}
 .dl p{color:var(--mu);margin:8px 0 28px}
 .about{display:grid;grid-template-columns:240px 1fr;gap:44px;align-items:center}
@@ -100,14 +114,14 @@ footer b{color:var(--cy)}
 <body>
 <canvas id="bg" aria-hidden="true"></canvas>
 <nav><div class="wrap"><a class="logo" href="#top">CYBERDECK</a>
-<div class="links"><a href="#features">FEATURES</a><a href="#wallpapers">WALLPAPERS</a><a href="#install">INSTALL</a><a href="#about">ABOUT</a><a class="btn pri sm" href="#download">DOWNLOAD</a></div></div></nav>
+<div class="links"><a href="#features">FEATURES</a><a href="#wallpapers">WALLPAPERS</a><a href="#pricing">PRICING</a><a href="#install">INSTALL</a><a href="#about">ABOUT</a><a class="btn pri sm" href="#download">DOWNLOAD</a></div></div></nav>
 
 <header class="hero" id="top"><div class="wrap">
 <div class="tag">// WINDOWS CUSTOMIZATION SUITE · v2.0</div>
 <h1 class="glitch" data-text="CYBERDECK">CYBERDECK</h1>
 <p class="sub">Take full control of your Windows look and performance. Neon wallpapers, taskbar, icons, system mods and live PC stats, all in one cyberpunk dashboard.</p>
 <div class="cta"><a class="btn pri dlbtn" href="#download">⬇ DOWNLOAD FOR WINDOWS</a><a class="btn" href="#features">EXPLORE FEATURES</a></div>
-<div class="chips"><span class="chip"><b>10</b> WALLPAPERS</span><span class="chip"><b>6</b> MODULES</span><span class="chip"><b>FREE</b></span><span class="chip">WINDOWS <b>10 / 11</b></span></div>
+<div class="chips"><span class="chip"><b>24</b> WALLPAPERS</span><span class="chip"><b>6</b> MODULES</span><span class="chip"><b>FREE</b> + PREMIUM</span><span class="chip">WINDOWS <b>10 / 11</b></span></div>
 <div class="win rv"><div class="wbar"><span>CYBERDECK // WINDOWS CUSTOMIZER</span><span>● ONLINE</span></div>
 <div class="wbody"><div class="side"><span class="on">◈ PC STATS</span><span>▣ WALLPAPERS</span><span>▤ TASKBAR</span><span>◫ ICONS</span><span>⬢ WINDOWS MODS</span><span>⚡ PERFORMANCE</span></div>
 <div class="main">
@@ -122,7 +136,7 @@ footer b{color:var(--cy)}
 <div class="tag rv">// CAPABILITIES</div><h2 class="rv">Six modules. Total control.</h2>
 <p class="lead rv">Everything you need to make Windows look and run the way you want, with simple neon switches and instant feedback.</p>
 <div class="grid">
-<div class="card rv"><i>▣</i><h3>WALLPAPERS</h3><p>10 futuristic cyberpunk wallpapers built in, live preview and one-click apply. Add your own images too.</p></div>
+<div class="card rv"><i>▣</i><h3>WALLPAPERS</h3><p>10 cyberpunk wallpapers free, plus 8 more in Pro and 6 animated live wallpapers in Premium. Live preview and one-click apply.</p></div>
 <div class="card rv"><i>▤</i><h3>TASKBAR</h3><p>Center or left icons, auto-hide, hide search, Task View and widgets, compact icons.</p></div>
 <div class="card rv"><i>◫</i><h3>ICONS &amp; DESKTOP</h3><p>Hide desktop icons, show file extensions and hidden files, full path in Explorer.</p></div>
 <div class="card rv"><i>⬢</i><h3>WINDOWS MODS</h3><p>Dark mode, transparency, accent title bars and the classic right-click menu for Windows 11.</p></div>
@@ -131,9 +145,24 @@ footer b{color:var(--cy)}
 </div></div></section>
 
 <section id="wallpapers"><div class="wrap">
-<div class="tag rv">// GALLERY</div><h2 class="rv">10 built-in neon wallpapers</h2>
-<p class="lead rv">Generated locally in full 1920×1080 the first time you launch the app. No internet needed.</p>
+<div class="tag rv">// GALLERY</div><h2 class="rv">10 free neon wallpapers</h2>
+<p class="lead rv">Generated locally in full 1920×1080 the first time you launch the app. No internet needed. Pro adds 8 more wallpapers and Premium adds 6 live animated ones.</p>
 <div class="gal rv" id="gal"></div></div></section>
+
+<section id="pricing"><div class="wrap">
+<div class="tag rv">// PLANS</div><h2 class="rv">Choose your plan</h2>
+<p class="lead rv">Start free and upgrade whenever you want more.</p>
+<div class="plans">
+<div class="plan rv"><h3>FREE</h3><div class="price">$0 <small>forever</small></div>
+<ul><li>10 neon wallpapers</li><li>Taskbar, icons and Windows mods</li><li>Live PC stats and performance tools</li><li class="no">8 extra wallpapers</li><li class="no">6 live animated wallpapers</li></ul>
+<a class="btn" href="#download">DOWNLOAD FREE</a></div>
+<div class="plan mid rv"><h3>PRO</h3><div class="price">$2.99 <small>one-time</small></div>
+<ul><li>Everything in Free</li><li>8 extra wallpapers (18 total)</li><li>Free updates</li><li class="no">6 live animated wallpapers</li><li class="no">Priority support</li></ul>
+<a class="btn" data-buy="Pro" href="#pricing">GET PRO</a></div>
+<div class="plan pro rv"><span class="bd">BEST VALUE</span><h3>PREMIUM</h3><div class="price">$5.99 <small>one-time</small></div>
+<ul><li>Everything in Pro</li><li>6 live animated wallpapers</li><li>All future wallpapers</li><li>Priority support</li><li>Personal license key</li></ul>
+<a class="btn pri" data-buy="Premium" href="#pricing">GET PREMIUM</a></div>
+</div></div></section>
 
 <section id="install"><div class="wrap">
 <div class="tag rv">// QUICK START</div><h2 class="rv">Up and running in 3 steps</h2><p class="lead rv">No installer, no setup. Just one portable file.</p>
@@ -170,6 +199,8 @@ footer b{color:var(--cy)}
 <script>
 /* ====== EDIT THESE ====== */
 const DOWNLOAD_URL = "https://github.com/loriklushtaku-cpu/CyberDeck/releases/download/v2.0/CyberDeck.exe";               /* paste your CyberDeck.exe download link here */
+const PREMIUM_URL = "";   /* paste your payment link here */
+const PRICE = "$4.99";    /* change the price here */
 const LINKS = {GITHUB:"", INSTAGRAM:"", EMAIL:""};  /* e.g. GITHUB:"https://github.com/you", EMAIL:"mailto:you@mail.com" */
 /* ======================== */
 const $=s=>document.querySelector(s);
@@ -177,6 +208,7 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');cl
 const dm=$('#dlmain');
 if(DOWNLOAD_URL){dm.href=DOWNLOAD_URL;dm.target='_blank';dm.rel='noopener noreferrer';dm.addEventListener('click',()=>toast('DOWNLOAD STARTED'))}
 else dm.addEventListener('click',e=>{e.preventDefault();toast('DOWNLOAD LINK COMING SOON')});
+document.querySelectorAll('[data-buy]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();toast(b.dataset.buy.toUpperCase()+' PLAN COMING SOON')}));
 const soc=$('#soc');Object.entries(LINKS).forEach(([k,v])=>{if(!v)return;const a=document.createElement('a');a.className='btn sm';a.href=v;a.target='_blank';a.rel='noopener';a.textContent=k;soc.appendChild(a)});
 const W=[["Neon Sunset Grid","radial-gradient(circle at 50% 56%,#fcee0a 0 13%,#ff2bd6 14% 21%,transparent 22%),linear-gradient(#0b0221,#8a0f6e 62%,#05010f 62%)"],
 ["Night City","repeating-linear-gradient(90deg,#120a28 0 22px,#1a0f38 22px 40px),linear-gradient(#02020a,#2a0a4a)"],
